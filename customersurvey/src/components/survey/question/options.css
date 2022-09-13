@@ -1,0 +1,9 @@
+.optiontext{
+    width:50%;
+    border:none;
+    border-bottom: 2px solid blue;
+    background-color: rgb(243, 243, 243);
+  }
+.optiontext:focus{
+    outline: none;
+  }

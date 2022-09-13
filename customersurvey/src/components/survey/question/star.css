@@ -1,0 +1,15 @@
+
+  .on {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: rgb(3, 62, 255);
+  }
+  .off {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #ccc;
+  }

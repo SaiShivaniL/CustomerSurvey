@@ -1,0 +1,108 @@
+*{
+    font-family: cursive;
+}
+.rbox{
+    text-align:center;
+    margin-top: 30px;  
+}
+h1{
+    background-color:white ;
+}
+a{
+    background-color:white ;
+    color: black;
+}
+.rpage {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 177, 255);
+}
+
+.rcover {
+    background-color: white;
+    width: 32em;
+    height: 37em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+input[type=text] {
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 0.5px;
+    width: 55%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+    margin-bottom: 8px;
+    border:1px solid rgb(182, 179, 179);
+}
+
+input[type=text]:focus {
+    outline-color: rgb(32, 177, 255);
+}
+input[type=email] {
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 0.5px;
+    width: 55%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+    margin-bottom: 8px;
+    border:1px solid rgb(182, 179, 179);
+}
+
+input[type=email]:focus {
+    outline-color: rgb(32, 177, 255);
+}
+
+input[type=password] {
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 0.5px;
+    width: 55%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+    margin-bottom: 8px;
+    border:1px solid rgb(182, 179, 179);
+}
+
+input[type=password]:focus {
+    outline-color: rgb(32, 177, 255);
+}
+
+.rlogin-btn {
+    width: 40%;
+    height: 3em;
+    background-color: rgb(32, 177, 255);
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    border-color: rgb(32, 177, 255);
+
+}
+.rlogin-btn:hover { transform: scale(1.25);}
+
+.text {
+    position: relative;
+    bottom: -2em;
+}
+
+.hide {
+    position: absolute;
+    transform: scale(0);
+}

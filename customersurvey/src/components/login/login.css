@@ -1,0 +1,170 @@
+*{
+    font-family: cursive;
+}
+.lbox{
+    text-align:center;
+    margin-top: 30px;
+    
+}
+h1{
+    background-color:white ;
+}
+a{
+    background-color:white ;
+    color: black;
+}
+.lpage {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(32, 177, 255);
+}
+
+.lcover {
+    background-color: white;
+    width: 30em;
+    height: 36em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+/*input {
+    border: none;
+    height: 0.9em;
+    width: 55%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+}
+
+input:focus {
+    outline-color: rgb(32, 177, 255);
+}*/
+
+.llogin-btn {
+    width: 40%;
+    height: 3.5em;
+    background-color: rgb(32, 177, 255);
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    border-color: rgb(32, 177, 255);
+
+}
+.llogin-btn:hover { transform: scale(1.25);}
+
+.text {
+    position: relative;
+    bottom: -2em;
+}
+
+.hide {
+    position: absolute;
+    transform: scale(0);
+}
+
+.survey-btn{
+    
+    width:300px;
+    height:100px;
+    border:0;
+    color:white;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    font-size: 30px;
+    outline: none;
+    border-radius: 20px ;
+   position: relative;
+   background-image: linear-gradient(to right, #706ee8 , #0838e3);
+   z-index: 1;
+
+}
+.loginname{
+    font-size: 20px;
+    color:white;
+    font-weight: bold;
+    text-align: right;
+    border-radius: 15px ;
+    background-color: #0838e3;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    z-index: 1;
+}
+.survey-btn:hover{
+ 
+  cursor:pointer;
+  -ms-transform: scale(0.5); /* IE 9 */
+  -webkit-transform: scale(0.5); /* Safari 3-8 */
+  transform: scale(1.1);
+  /* box-shadow: 0 5px 5px rgba(0, 0, 0, 0.8); */
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+/*.survey-btn{
+    width:300px;
+    height:100px;
+    border:none;
+    color: black;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    font-size: 30px;
+    outline: none;
+    border: 3px solid #42FBF2;
+   position: relative;
+   z-index: 1;
+
+}
+.survey-btn:hover{
+  color: black;
+  cursor:pointer;
+
+}
+.survey-btn:before{
+    transition: 0.5s all ease;
+    position: absolute;
+    top:0;
+    left:50%;
+    right:50%;
+    bottom: 0;
+    opacity:0;
+    content: "";
+    background-color: #42FBF2;
+}
+
+.survey-btn:hover:before{
+    transition: 0.5s all ease;
+    left:0;
+    right: 0;
+    opacity:1;
+    z-index: -1;
+
+
+}*/
+/*.survey-btn{
+    width: 350px;
+    height: 100px;
+    color: white;
+    background-color: purple;
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 0 rgb(32, 177, 255);
+    transition: ease-out 0.3s;
+    font-size: 20px;
+    outline: none;
+
+}
+.survey-btn:hover{
+    box-shadow: inset 400px 0 0 0 rgb(32,177,255);
+    cursor:pointer;
+    color: #000;
+}*/

@@ -1,0 +1,60 @@
+.Qsn {
+    text-align: left;
+    height:auto;
+    width:70%;
+    padding: 1% 5% 2% 5% ;
+    margin:2%;
+    background-color: rgb(243, 243, 243);
+    border-radius: 15px;
+  }
+
+  .qsntext{
+    width:100%;
+    border:none;
+    border-bottom: 2px solid blue;
+    background-color: rgb(243, 243, 243);
+    resize:none;
+  }
+
+  .length{
+    
+    overflow-wrap: break-word;
+    margin-bottom: 1%;
+  }
+
+  .qsntext:focus{
+    outline: none;
+  }
+
+  button{
+    background-color: white;
+    border: 2px solid rgb(223, 223, 223);
+    color:black;
+    padding:0.2rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    width:5rem;
+    margin:10px 0px 0px 0px;
+    font-weight: 500;
+  }
+
+  button:active{
+    background-color: rgb(203, 203, 203);
+  } 
+  
+  button:disabled{
+    background-color: grey;
+  }
+
+
+  .texttext{
+    width:100%;
+    height:auto;
+    border:none;
+    border:1px solid rgb(175, 175, 175);
+    background-color: rgb(243, 243, 243);
+    }
+
+  .texttext:focus{
+    outline: none;
+  }

@@ -1,0 +1,22 @@
+.mainQsn {
+    text-align: left;
+    height:auto;
+    width:70%;
+    padding: 1% 5% 2% 5% ;
+    margin:2% 1%;
+    background-color: rgb(243, 243, 243);
+    border-radius: 15px;
+  }
+
+  .mainqsntext{
+    width:100%;
+    border:none;
+    border-bottom: 2px solid blue;
+    background-color: rgb(243, 243, 243);
+    resize:none;
+    font-size: 1.5rem;
+  }
+
+  .mainqsntext:focus{
+    outline:none;
+  }
