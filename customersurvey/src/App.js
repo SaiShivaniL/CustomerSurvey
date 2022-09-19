@@ -29,6 +29,9 @@ import Pollcard from "./components/poll/pollcard";
 import Showpoll from "./components/poll/showpoll";
 import ShowGraph from "./components/poll/showgraph";
 import CsurveyPage from './components/customer/coptions';
+import CompletedPolls from './components/customer/cpolls/completedpolls';
+import CustomerPolls from './components/customer/cpolls/customerPoll';
+import PollCardCustomer from './components/customer/cpolls/pollcardcustomer';
 function App() {
   const navigate=useNavigate()
   const history = createBrowserHistory();
@@ -60,6 +63,9 @@ function App() {
           <Route path="/showpoll" element={<Showpoll />} />
           <Route path="/poll/:id" element={<Pollcard />} />
           <Route path="/graph/:id" element={<ShowGraph />} />
+          <Route path="/customerPoll" element={<CustomerPolls />} />
+          <Route path="/completedPoll" element={< CompletedPolls/>}/>
+          <Route path="/customerPoll/:id" element={<PollCardCustomer />} />
       </Routes>
   
     </div>

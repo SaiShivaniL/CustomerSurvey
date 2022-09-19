@@ -34,6 +34,32 @@ const Pollcard = (props) => {
   }, [id]);
   console.log({ poll });
 
+  const deletePoll = (id) =>{
+
+    const user_id = localStorage.getItem("Name");
+
+    const postURL = `http://localhost:5055/poll/${poll._id}`; //Our previously set up route in the backend
+    console.log("here");
+    fetch(postURL, {
+      method: "DELETE",
+      headers: {
+        user_id: user_id,
+        "Content-Type": "application/json",
+      },
+    })
+
+      .then((response) => {response.json()
+
+      console.log(response)
+
+      alert("deleted")
+
+      navigate("/showallpolls")
+
+      })
+
+  }
+
   const handleVote = (key) => {
     const user_id = localStorage.getItem("Name");
     const postURL = `http://localhost:5055/vote/${poll._id}`; //Our previously set up route in the backend
@@ -69,6 +95,12 @@ const Pollcard = (props) => {
 
   return (
     <div>
+      <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
+        <br></br><center><button onClick={()=>{
+            navigate("/login")
+            localStorage.removeItem("Name")}}>LogOut</button></center>
+        <br></br>
+        </p>
       <center>
       {poll ? (
         <div
@@ -131,6 +163,12 @@ const Pollcard = (props) => {
           >
             view votes
           </button>
+          <button style={{padding: "10px",backgroundColor: "#fe5059", borderRadius: "10px",
+  width: "40vw",
+  border: "0",
+  cursor: "pointer",
+}}
+onClick={() => deletePoll(id)}>delete poll</button>
           {isVoted ? (
             <p style={{ color: "red" }}>you have already voted</p>
           ) : (

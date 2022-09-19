@@ -108,6 +108,12 @@ function CreatePolls() {
 
   return (
     <div >
+      <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
+        <br></br><center><button onClick={()=>{
+            navigate("/login")
+            localStorage.removeItem("Name")}}>LogOut</button></center>
+        <br></br>
+        </p>
     <center >
     <div >
       <h1 >Create Your Poll</h1>

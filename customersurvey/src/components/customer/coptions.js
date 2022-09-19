@@ -16,7 +16,7 @@ const CsurveyPage = () => {
         <br></br></p>
        <div className="lcover">
             <button className="survey-btn" onClick={()=>navigate("/viewPage")}>Survey/Feedback  <RiSurveyLine/></button>
-            <button className="survey-btn" onClick={()=>navigate("/")}>Polls  <FaPoll/></button>
+            <button className="survey-btn" onClick={()=>navigate("/customerPoll")}>Polls  <FaPoll/></button>
         </div>              
     </div>
     )

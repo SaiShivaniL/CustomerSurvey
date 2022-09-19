@@ -186,10 +186,32 @@ app.post("/vote/:id", async (req, res, next) => {
   }
 });
 
+app.delete("/poll/:id", async (req, res, next) => {
 
-
-
-
+    const id = req.headers["user_id"];
+    console.log(id);
+    if (!id) {
+  
+      return res.status(403).send("A token is required for authentication");
+  
+    }
+    const { id: pollId } = req.params;
+    console.log(id);
+    // const { answer } = req.body;
+    try {
+      // if (answer) {
+        const result = await Poll.deleteOne({id:pollId});
+        console.log(result)
+         var response = result;
+          return res.status(202).json(response);
+    } catch (err) {
+      console.log(err);
+      return next({
+        status: 400,
+        message: err.message,
+      });
+    }
+  });
 
 
 
