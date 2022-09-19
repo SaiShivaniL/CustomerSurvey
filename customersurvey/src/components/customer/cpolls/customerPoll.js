@@ -45,6 +45,7 @@ function CustomerPolls(props) {
         {/* {JSON.stringify(polls)} */}
 
         <nav style={{position:"fixed",top:"0",width:"100%",backgroundColor:"blue",textAlign:"center",height:"3rem"}}>
+        <p style={{fontSize:'15px',color:'white',textAlign:'right',position:'absolute',top:'0',left:'20px'}}>&nbsp;Logged in as &nbsp;{localStorage.getItem("cName")} !</p>
                 <NavLink to="/customerPoll"   style={({ isActive }) => ({color:'white',borderBottom:isActive?'2px solid white':'',textDecoration:'none',backgroundColor:'blue'})}>
                     Polls to Complete
                 </NavLink>
@@ -52,6 +53,10 @@ function CustomerPolls(props) {
                 <NavLink to="/completedPoll"  style={({ isActive }) => ({color:'white',borderBottom:isActive?'2px solid white':'',textDecoration:'none',backgroundColor:'blue'})}>
                     Completed Poll
                 </NavLink>
+                <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
+            this.props.navigate("/cfront")
+            localStorage.removeItem("cName")
+            localStorage.removeItem("cEmail")}}>LogOut</button></p>
             </nav>
             <center>
         {Object.keys(polls).map((data) =>

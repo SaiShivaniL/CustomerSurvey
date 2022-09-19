@@ -57,7 +57,6 @@ const Poll =  mongoose.model("polls", pollSchema);
 
 //Routes
 /*const mailer=(email,otp)=>{
-
 }*/
 
 
@@ -87,7 +86,8 @@ app.get("/poll", async (req, res) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const user = await User.findOne({'id':id});
+    // const user = await User.findOne({'id':id});
+
     const temp3 = await Poll.find();
     console.log(temp3);
     var poll = [];
@@ -95,7 +95,7 @@ app.get("/poll", async (req, res) => {
       const temp = await Poll.findById(temp3[i]._id.toString()); //toString returns a string
       poll.push(temp);
     }
-    return res.status(201).json({ ...poll, user: user._id });
+    return res.status(201).json({ ...poll });
   } catch (err) {
     console.log(err);
     return {
@@ -216,7 +216,7 @@ app.delete("/poll/:id", async (req, res, next) => {
 
 
 
-
+// -------------anchal end-----------------------
 app.get('/api',(req,res)=>{
     User.find({},(err,user)=>{
         if(err){
@@ -380,4 +380,3 @@ app.post("/change",async (req,res)=>{
 app.listen(5055,()=>{
     console.log("server Started at port 5055")
 })
-

@@ -69,6 +69,11 @@ const PollCardCustomer = (props) => {
 
   return (
     <div>
+        <p style={{fontSize:'15px',color:'white',textAlign:'right',position:'absolute',top:'0',left:'20px'}}>&nbsp;Logged in as &nbsp;{localStorage.getItem("cName")} !</p>
+        <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
+            this.props.navigate("/cfront")
+            localStorage.removeItem("cName")
+            localStorage.removeItem("cEmail")}}>LogOut</button></p>
       <center>
         {poll ? (
           <div
