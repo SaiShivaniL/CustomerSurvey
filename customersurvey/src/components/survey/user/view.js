@@ -18,6 +18,25 @@ export default class View extends React.Component{
         this.setState({final:[...filt,e]})
     }
     async componentDidMount(){
+
+        var {state}=this.props.location
+        var {code}=!state?{code:"notsecret"}:state
+        console.log(code,localStorage.getItem("Name"))
+        if(code==="notsecret"){
+            console.log("got into")
+            this.props.navigate('/login')
+        }
+        else if(!localStorage.getItem("Name")){
+            console.log("got in")
+         this.props.navigate("/login")
+        }
+        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+            if(data.data.length===0){
+               this.props.navigate("/login")
+            }
+          })
+
+
         var d=await axios.get("http://localhost:8000/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("viewId"))
             this.setState({survey:d.data},()=>{
             var arry=[]
@@ -30,6 +49,7 @@ export default class View extends React.Component{
         }
     
     render(){
+        
         return (
             <center>
                 {this.state.final.length>0?

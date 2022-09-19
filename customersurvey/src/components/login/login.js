@@ -36,7 +36,7 @@ const LoginPage = () => {
             if(res.data.message==="Login Successfull")
             {
                 localStorage.setItem("Name",id)
-                navigate("/homepage")
+                navigate("/homepage",{ state: {code:"secret"} })
             }
         })
     }
@@ -46,10 +46,11 @@ const LoginPage = () => {
         }
     }
     return (
+        
         <div className="lpage">
         <div className="lcover">
             {console.log("User",user)}
-
+      
             <div className='lbox'>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px"/>
             </div>

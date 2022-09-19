@@ -11,9 +11,31 @@ export default class Page extends React.Component{
             survey:[]
         }
     }
-
-
+    componentDidMount(){
+        
+        let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
+                        a.then((data)=>{
+                            var b=data.data[0].survey.reverse();
+                            this.setState({survey:b})
+                        })
+    }
     render(){
+        var {state}=this.props.location
+        var {code}=!state?{code:"notsecret"}:state
+        console.log(code,localStorage.getItem("Name"))
+        if(code==="notsecret"){
+            console.log("got into")
+            this.props.navigate('/login')
+        }
+        else if(!localStorage.getItem("Name")){
+            console.log("got in")
+         this.props.navigate("/login")
+        }
+        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+            if(data.data.length===0){
+               this.props.navigate("/login")
+            }
+          })
         // var a = axios.get("http://localhost:8000/api").then((data)=>this.setState({survey:data}))
         return (
                 <div>
@@ -23,7 +45,7 @@ export default class Page extends React.Component{
             localStorage.removeItem("Name")}}>LogOut</button></center>
                     </p>
                     {/*<Link to="create"><button className="create" >+</button></Link>*/}
-                    <button className="create" onClick={()=>this.props.navigate("/create")}>+</button>
+                    <button className="create" onClick={()=>this.props.navigate("/create",{ state: {code:"secret"} })}>+</button>
                     <button className="refresh" onClick={()=>{
                         let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
                         a.then((data)=>{
@@ -38,8 +60,12 @@ export default class Page extends React.Component{
                                 <h3>id : {e.id}</h3>
                                 <button style={{marginLeft:"2rem",marginRight:"2rem"}} onClick={()=>{
                                     localStorage.setItem("viewId", e.id)
-                                    this.props.navigate("/view")
+                                    this.props.navigate("/view",{ state: {code:"secret"} })
                                     }}>View</button>
+                                <button onClick={()=>{
+                                    localStorage.setItem("EditId", e.id)
+                                    this.props.navigate("/editpage",{ state: {code:"secret"} })
+                                }}>edit</button>
                                 <button style={{marginLeft:"2rem",marginRight:"2rem"}} onClick={()=>{
                                     axios.delete("http://localhost:8000/user/"+localStorage.getItem("Name")+"/"+e.id)
                                     var f=this.state.survey.filter((x)=>x.id!==e.id);

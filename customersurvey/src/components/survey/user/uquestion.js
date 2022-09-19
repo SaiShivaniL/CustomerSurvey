@@ -36,7 +36,7 @@ export default class UQuestion extends React.Component{
 
     deleteCheckbox(checkbox){
         var filterr= this.state.answer.ans.filter((x)=>x!==checkbox)
-        this.setState({answer:{qid:this.props.qsn.qid,qn:this.props.qsn.qn,type:this.props.qsn.type,required:this.props.qsn.required,ans:filterr}},()=>this.props.getfinal(this.state.answer))
+        this.setState({option:filterr,answer:{qid:this.props.qsn.qid,qn:this.props.qsn.qn,type:this.props.qsn.type,required:this.props.qsn.required,ans:filterr}},()=>this.props.getfinal(this.state.answer))
     }
     getStar(star){
         this.setState({answer:{qid:this.props.qsn.qid,qn:this.props.qsn.qn,type:this.props.qsn.type,required:this.props.qsn.required,ans:star}},()=>this.props.getfinal(this.state.answer))

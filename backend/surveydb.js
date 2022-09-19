@@ -35,6 +35,10 @@ class DbConnect {
     var a = this.db.collection(this.COLLECTIONNAME).find({ email: email });
     return await a.toArray();
   }
+  async findbyid(id){
+    var a = this.db.collection(this.COLLECTIONNAME).find({ id: id });
+    return await a.toArray();
+  }
 
   update(doc, doc1) {
     this.db
@@ -54,6 +58,15 @@ class DbConnect {
       });
   }
 
+  deletebyid(id){
+    this.db
+    .collection(this.COLLECTIONNAME)
+    .deleteMany({ id: id }, function (err, res) {
+      if (err) throw err;
+      console.log(res);
+    });
+  }
+ 
   drop() {
     this.db.collection(this.COLLECTIONNAME).drop();
   }

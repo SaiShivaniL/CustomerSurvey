@@ -29,6 +29,22 @@ export default class TryMain extends React.Component{
     }
 
     render(){
+        var {state}=this.props.location
+        var {code}=!state?{code:"notsecret"}:state
+        console.log(code,localStorage.getItem("Name"))
+        if(code==="notsecret"){
+            console.log("got into")
+            this.props.navigate("/login")
+        }
+        else if(!localStorage.getItem("Name")){
+            console.log("got in")
+           this.props.navigate("/login")
+        }
+        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+            if(data.data.length===0){
+               this.props.navigate("/login")
+            }
+          })
         return (
             <center>
                 <div>
@@ -96,7 +112,10 @@ export default class TryMain extends React.Component{
                         return a.qid-b.qid
                       });
                     this.setState({msgshow:false,submitqsn:{username:localStorage.getItem("Name"),survey:{user:localStorage.getItem("Name"),id:id,title:this.state.title,question:sorted}}},()=>{
-                        axios.post("http://localhost:8000/user",this.state.submitqsn).then(()=>this.props.navigate("/Page"))
+                        axios.post("http://localhost:8000/user",this.state.submitqsn).then(async ()=>{
+                        await axios.post("http://localhost:8000/addquestion",this.state.submitqsn)
+                        this.props.navigate("/Page",{ state: {code:"secret"} })    
+                        })
                     })
                 }
                 else{

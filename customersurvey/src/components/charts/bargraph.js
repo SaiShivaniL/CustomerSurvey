@@ -12,7 +12,8 @@ function Barchart() {
     const sLocation=[];
 
     const getEmployeerecord= async()=>{
-      const dataReq= await fetch("http://localhost:5055/api");
+      const dataReq= await fetch("http://localhost:8000/showans/Quiz2022815161713");
+      console.log(dataReq)
       const dataRes= await dataReq.json();
       //console.log(dataRes);
 

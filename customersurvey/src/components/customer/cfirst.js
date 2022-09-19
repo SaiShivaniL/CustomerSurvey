@@ -28,9 +28,14 @@ const CustomerPage = () => {
         var emx=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
         if(name && email){
             if(emx.test(email)){
-                axios.post("http://localhost:8000/newcustomer",final).then(()=>{
+                axios.post("http://localhost:8000/newcustomer",final).then((res)=>{
+                    if(res.data.message==="posted"){
                     localStorage.setItem("cEmail",email)
-                    navigate("/viewpage")
+                    localStorage.setItem("cName",name)
+                    navigate("/coptions")}
+                    else{
+                        setMessage(res.data.message)
+                    }
                 })
             }
             else{
@@ -47,10 +52,10 @@ const CustomerPage = () => {
         <div className="ccover">
             <div className='cbox'>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px" />
-            
-            <p style={{color:"red",backgroundColor:"white",marginTop:"-8px"}}>{message}</p>
             </div>
             <h1>Cutomer Details</h1>
+            <br></br>
+            <p style={{color:"red",backgroundColor:"white",marginTop:"-8px"}}>{message}</p>
             <input  type="text" name="name" style={{marginTop:"-10px"}}value={user.name} placeholder="Enter your Name" onChange={handleChange}/>
             <input  type="email" name="email" value={user.email} className="cinput" placeholder=" Enter your email" onChange={handleChange} />
             <button className="clogin-btn" onClick={customer}>Go to Survey<BiLogIn/></button>

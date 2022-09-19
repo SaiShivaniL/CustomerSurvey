@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
-import { Link, withRouter, useNavigate } from "react-router-dom";
+import { Link, withRouter, useNavigate,useLocation } from "react-router-dom";
+import axios from "axios";
 function CreatePolls() {
   const navigate = useNavigate();
   const [options_element, setOptions_Element] = useState(null);
@@ -27,7 +28,7 @@ function CreatePolls() {
       .catch((e) => {
         console.log(e);
       });
-    navigate("/showpoll");
+    navigate("/showpoll",{ state: {code:"secret"} });
   };
 
   const handleChangeQuestion = (e) => {
@@ -71,6 +72,7 @@ function CreatePolls() {
   
 
   useEffect(() => {
+
     const temp = state.options.map((option, i) => (
       <Fragment key={i}>
         <label className="form-label">Option</label>
