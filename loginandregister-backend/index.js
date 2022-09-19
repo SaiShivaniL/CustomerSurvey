@@ -379,9 +379,6 @@ app.post("/change",async (req,res)=>{
 })
 app.listen(5055,()=>{
     console.log("server Started at port 5055")
-<<<<<<< HEAD
-})
-=======
 })
 
 
@@ -795,4 +792,3 @@ app.listen(5055,()=>{
 //     console.log("server Started at port 5055")
 // })
 
->>>>>>> 872cb82021efe02c2e34f0636f6bcee42d66c26e
