@@ -5,7 +5,10 @@ import {RiSurveyLine} from 'react-icons/ri'
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 const CsurveyPage = () => {
-    const navigate=useNavigate()     
+    const navigate=useNavigate() 
+    {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
+        this.props.navigate("/cfront")
+    }}    
     return (
       <div className="lpage">
           <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("cName")}&nbsp;&nbsp;&nbsp;

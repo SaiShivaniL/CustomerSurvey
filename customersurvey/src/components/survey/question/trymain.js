@@ -112,10 +112,12 @@ export default class TryMain extends React.Component{
                         return a.qid-b.qid
                       });
                     this.setState({msgshow:false,submitqsn:{username:localStorage.getItem("Name"),survey:{user:localStorage.getItem("Name"),id:id,title:this.state.title,question:sorted}}},()=>{
+                        if(localStorage.getItem("Name")){
                         axios.post("http://localhost:8000/user",this.state.submitqsn).then(async ()=>{
                         await axios.post("http://localhost:8000/addquestion",this.state.submitqsn)
                         this.props.navigate("/Page",{ state: {code:"secret"} })    
                         })
+                    }else{this.props.navigate("/login")}
                     })
                 }
                 else{

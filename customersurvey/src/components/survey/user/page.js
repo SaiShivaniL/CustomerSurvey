@@ -13,7 +13,11 @@ export default class Page extends React.Component{
         }
     }
     componentDidMount(){
-        
+        console.log("entered page.js")
+        if(!localStorage.getItem("Name")){
+            console.log("got in")
+         this.props.navigate("/login")
+        }
         let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
                         a.then((data)=>{
                             var b=data.data[0].survey.reverse();
@@ -26,10 +30,10 @@ export default class Page extends React.Component{
         console.log(code,localStorage.getItem("Name"))
         if(code==="notsecret"){
             console.log("got into")
-            this.props.navigate('/login')
+            this.props.navigate("/login")
         }
         else if(!localStorage.getItem("Name")){
-            console.log("got in")
+            console.log("got in a")
          this.props.navigate("/login")
         }
         axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
@@ -45,11 +49,12 @@ export default class Page extends React.Component{
                     {/*<Link to="create"><button className="create" >+</button></Link>*/}
                     <button className="create" onClick={()=>this.props.navigate("/create",{ state: {code:"secret"} })}>+</button>
                     <button className="refresh" onClick={()=>{
+                        if(localStorage.getItem("Name")){
                         let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
                         a.then((data)=>{
                             var b=data.data[0].survey.reverse();
                             this.setState({survey:b})
-                        })
+                        })}else{this.props.navigate("/login")}
                     }}>&#10227;</button>
                     <center>
                         {this.state.survey.map((e)=>{
@@ -65,9 +70,10 @@ export default class Page extends React.Component{
                                     this.props.navigate("/editpage",{ state: {code:"secret"} })
                                 }}>edit</button>
                                 <button style={{marginLeft:"2rem",marginRight:"2rem"}} onClick={()=>{
-                                    axios.delete("http://localhost:8000/user/"+localStorage.getItem("Name")+"/"+e.id)
+                                    if(localStorage.getItem("Name"))
+                                    {axios.delete("http://localhost:8000/user/"+localStorage.getItem("Name")+"/"+e.id)
                                     var f=this.state.survey.filter((x)=>x.id!==e.id);
-                                    this.setState({survey:f})
+                                    this.setState({survey:f})}else{this.props.navigate("/login")}
                             }}>Delete</button>
                              <button onClick={()=>{
                                     localStorage.setItem("GraphId", e.id)

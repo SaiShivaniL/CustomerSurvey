@@ -39,6 +39,9 @@ export default class Userview extends React.Component{
         }
     
     render(){
+        {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
+            this.props.navigate("/cfront")
+      }}
         return (
             <center>
                 {this.state.final.length>0?

@@ -15,6 +15,7 @@ var otp=new mongodb("Otp")
 router.get("/users/:id",async function(req, res){
     users.init();
     v = await users.findbyid(req.params.id);
+    console.log("get/users/:id")
     res.send(v)
 })
 
@@ -46,9 +47,11 @@ qidarry=[]
 for(j=0;j<ans[0].length;j++){
     qidarry.push(ans[0][j].qid)
 }
+console.log("getshowans/id")
 res.send([o,qidarry])
    }
    else{
+    console.log("get/showans/:id")
     res.send([])
    }
    
@@ -61,6 +64,7 @@ res.send([o,qidarry])
 router.get("/showres",async function(req, res){
     answers.init()
     var r=await answers.find()
+    console.log("get/showres")
     res.send(r)
 })
 
@@ -93,11 +97,13 @@ router.post("/addres",async function(req, res){
             }
         }
         // console.log(i)
+        console.log("post/addres")
     res.send("Post")
 })
 router.delete("/delans/id/:id",async function(req,res){
   answers.init()
   await answers.deletebyid(req.params.id)
+  console.log("delete(/delans/id/:id,")
   res.send("Deleted answers")
 })
 
@@ -112,23 +118,27 @@ router.delete("/delans/id/:id",async function(req,res){
 router.get("/customer",async function(req, res){
     customer.init();
     v = await customer.find(customer.db);
+    console.log("/customer get")
     res.send(v)
 })
 router.get("/getemails",async function(req,res){
     customer.init()
     v=await customer.find()
     e=v.map((e)=>e.email)
+    console.log("/getemails")
     res.send(e)
 })
 router.get("/getnames",async function(req,res){
     customer.init()
     v=await customer.find()
     e=v.map((e)=>e.name)
+    console.log("get/getnames")
     res.send(e)
 })
 router.get("/customer/:email",async function(req,res){
     customer.init()
     v=await customer.findbyemail(req.params.email)
+    console.log("get(customer/:email")
     res.send(v)
 })
 router.post("/custdatbase",async function(req,res){
@@ -139,6 +149,7 @@ router.post("/custdatbase",async function(req,res){
         email=req.body.email
         console.log(email)
         customer.update({email:email},{todo:survey})
+        console.log("post(/custdatbase,")
         res.send({message:"posted"})
 })
 router.post("/newcustomer",async function(req,res){
@@ -147,6 +158,7 @@ router.post("/newcustomer",async function(req,res){
     //console.log(cust)
     //res.send(cust[0].name)
     console.log(req.body.email)
+    console.log("post(/newcustomer")
    if(cust.length===0){
        axios.post("http://localhost:5055/otp",{email:req.body.email})
        res.send({message:"new user"})
@@ -176,6 +188,7 @@ router.post('/addquestion',async function(req, res) {
         await customer.update({email:e.email},{todo:utodo})
 
     })
+    console.log("post('/addquestion'")
     res.send("ok")
 })
 
@@ -186,6 +199,7 @@ router.patch('/:email/addtocomp',async function(req, res){
     c=v[0].todo.filter((e)=>e.id===req.body.id)
     comp=[c[0],...v[0].complete]
     customer.update({email:email},{todo:todo,complete:comp})
+    console.log("patch('/:email/addtocomp'")
     res.send("updated")
 })
 
@@ -200,6 +214,7 @@ router.delete('/deltc/eid/:eid',async function(req,res){
        await customer.update({email:e.email},{todo:utodo,complete:ucomplete})
     })
     await axios.delete("http://localhost:8000/delans/id/"+req.params.eid)
+    console.log("'/deltc/eid/:eid")
     res.send("Deleted")
 })
 
@@ -314,10 +329,12 @@ router.post("/newtheory/eid/:eid",async function(req,res){
         //console.log(e.complete)
         var ucomplete=e.complete.filter((t)=>{t.id!=req.params.eid})
         //console.log(ucomplete)
+
         
        await customer.update({email:e.email},{todo:utodo,complete:ucomplete})
     })
     await axios.delete("http://localhost:8000/delans/id/"+req.params.eid)
+    console.log("post(/newtheory/eid/:eid'")
   res.send("check")
 })
 

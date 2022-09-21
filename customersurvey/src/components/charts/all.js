@@ -12,6 +12,7 @@ function All() {
     const [list, setList] = useState([]);
     const [msg,setMsg]=useState();
     useEffect(() => {
+        if(localStorage.getItem("Name")){
         async function getdata() {
             var d = await axios.get(
                 "http://localhost:8000/showans/"+localStorage.getItem("GraphId")
@@ -21,7 +22,9 @@ function All() {
            else{ setAns(d.data[0]);
             setQus(d.data[1]);}
         }
-        getdata();
+        getdata();}else{
+            navigate("/login")
+        }
     }, []);
     if(msg!=="No user has responded to this quiz"){
     var a = qus.map((e) => {

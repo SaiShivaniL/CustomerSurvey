@@ -18,6 +18,9 @@ export default class CompletedPage extends React.Component{
                     this.setState({list:x})})
     }
     render(){
+        {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
+              this.props.navigate("/cfront")
+        }}
         return <div>
             <nav style={{position:"fixed",top:"0",width:"100%",backgroundColor:"blue",textAlign:"center",height:"3rem"}}>
             <p style={{fontSize:'15px',color:'white',textAlign:'right',position:'absolute',top:'0',left:'20px'}}>&nbsp;Logged in as &nbsp;{localStorage.getItem("cName")} !</p>
