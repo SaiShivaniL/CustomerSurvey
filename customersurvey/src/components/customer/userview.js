@@ -74,7 +74,7 @@ export default class Userview extends React.Component{
                         if(this.state.message===""){
                            axios.post("http://localhost:8000/addres",{id:this.state.id,name:this.state.name,title:this.state.title,email:localStorage.getItem("cEmail"),ans:this.state.final}).then((d)=>console.log(d.data)).then(()=>{
                                 axios.patch("http://localhost:8000/"+localStorage.getItem("cEmail")+"/addtocomp",{id:this.state.id}).then(()=>{
-                                    this.props.navigate("/viewpage")
+                                    this.props.navigate(-1)
                                 })
                                 
                             })

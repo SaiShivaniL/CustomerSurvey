@@ -10,7 +10,7 @@ const CsurveyPage = () => {
       <div className="lpage">
           <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("cName")}&nbsp;&nbsp;&nbsp;
           <br></br><center><button onClick={()=>{
-            navigate("/cfront")
+            navigate("/")
             localStorage.removeItem("cName")
             localStorage.removeItem("cEmail")}}>LogOut</button></center>
         <br></br></p>

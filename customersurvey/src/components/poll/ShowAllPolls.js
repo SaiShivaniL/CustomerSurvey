@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createBrowserHistory as history } from "history";
  import { useNavigate } from 'react-router-dom';
+import Navigation from "../login/navigation";
 
 function ShowAllPolls(props) {
   const navigate=useNavigate()
@@ -32,12 +33,8 @@ function ShowAllPolls(props) {
 
   return (
     <div>
-      <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
-        <br></br><center><button onClick={()=>{
-            navigate("/login")
-            localStorage.removeItem("Name")}}>LogOut</button></center>
-        <br></br>
-        </p>
+      
+        <Navigation/>
       {/* {JSON.stringify(polls)} */}
       <center>
       {Object.keys(polls).map((data) =>

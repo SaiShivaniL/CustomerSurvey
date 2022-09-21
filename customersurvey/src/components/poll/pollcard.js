@@ -8,6 +8,8 @@ const Pollcard = (props) => {
   const [poll, setPoll] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
   const [newVote, setNewVote] = useState(false);
+  const [trial,setTrial] = useState(false)
+
   const navigate=useNavigate()
   const abc = (path) => {
    navigate(path);
@@ -39,7 +41,7 @@ const Pollcard = (props) => {
     const user_id = localStorage.getItem("Name");
 
     const postURL = `http://localhost:5055/poll/${poll._id}`; //Our previously set up route in the backend
-    console.log("here");
+    // console.log("her/e");
     fetch(postURL, {
       method: "DELETE",
       headers: {
@@ -50,7 +52,7 @@ const Pollcard = (props) => {
 
       .then((response) => {response.json()
 
-      console.log(response)
+      // console.log(response)
 
       alert("deleted")
 
@@ -86,18 +88,84 @@ const Pollcard = (props) => {
           setIsVoted(true);
         } else {
           setNewVote(true);
+          window.location.reload(false)
+
           // alert("voted");
         }
       });
+      // if(!isVoted){
+
+      // }
 
     // setGraph(true);
   };
+
+  const checkOptionVoted=(data2)=>{
+    for(var i=0;i<poll.options[data2].votedBy.length;i++){
+      if(poll.options[data2].votedBy[i]==localStorage.getItem("Name")){
+        // setTrial(true)
+        // return true;
+        return  <p
+        style={{
+          padding: "10px",
+          backgroundColor: "#b5e550",
+          borderRadius: "20px",
+        }}
+      >
+      <center>
+     <button
+          style={{
+            margin:"1vh",
+            backgroundColor: "#b5e550",
+            borderRadius: "20px",
+            // paddingLeft: "10vh",
+            // paddingRight: "10vh",
+            border: "0",
+            cursor: "pointer",
+            width:"auto"
+          }}
+          onClick={() => handleVote(data2)}
+        >
+          {" "}
+          {poll.options[data2].option}
+        </button>
+        </center>
+      </p>
+      }
+    }
+    return  <p
+    style={{
+      padding: "10px",
+      backgroundColor: "white",
+      borderRadius: "20px",
+    }}
+  >
+  <center>
+ <button
+      style={{
+        margin:"1vh",
+        backgroundColor: "white",
+        borderRadius: "20px",
+        // paddingLeft: "10vh",
+        // paddingRight: "10vh",
+        border: "0",
+        cursor: "pointer",
+        width:"auto"
+      }}
+      onClick={() => handleVote(data2)}
+    >
+      {" "}
+      {poll.options[data2].option}
+    </button>
+    </center>
+  </p>;
+  }
 
   return (
     <div>
       <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
         <br></br><center><button onClick={()=>{
-            navigate("/login")
+            navigate("/")
             localStorage.removeItem("Name")}}>LogOut</button></center>
         <br></br>
         </p>
@@ -114,10 +182,10 @@ const Pollcard = (props) => {
         >
           <p
             style={{
-              padding: "10px",
+              padding: "2vh",
               backgroundColor: "#ACACAC",
               borderRadius: "10px",
-              width: "40vw",
+              width: "auto",
               border: "0",
             }}
             //   onClick={() => abc(`/poll/${data}`)}
@@ -126,28 +194,9 @@ const Pollcard = (props) => {
           </p>
           <div>
             {Object.keys(poll.options).map((data2) => (
-              <p
-                style={{
-                  padding: "10px",
-                  backgroundColor: "white",
-                  borderRadius: "20px",
-                }}
-              >
-                <button
-                  style={{
-                    backgroundColor: "white",
-                    borderRadius: "20px",
-                    paddingLeft: "10vh",
-                    paddingRight: "10vh",
-                    border: "0",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => handleVote(data2)}
-                >
-                  {" "}
-                  {poll.options[data2].option}
-                </button>
-              </p>
+                checkOptionVoted(data2)
+                 
+
             ))}
           </div>
           <button
@@ -183,6 +232,7 @@ onClick={() => deletePoll(id)}>delete poll</button>
       ) : (
         <></>
       )}
+      <button  onClick={() => abc('/showallpolls')}>Show All Polls</button>
       </center>
     </div>
     

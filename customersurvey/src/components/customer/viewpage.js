@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import Userview from "./userview";
+import CNavigation from "./cnavigation";
 
 export default class ViewPage extends React.Component{
     constructor(){
@@ -29,11 +30,11 @@ export default class ViewPage extends React.Component{
                     Completed
                 </NavLink>
                 <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
-            this.props.navigate("/cfront")
+            this.props.navigate("/")
             localStorage.removeItem("cName")
             localStorage.removeItem("cEmail")}}>LogOut</button></p>
             </nav>
-           
+           <CNavigation/>
             <button style={{position:'fixed',right:'2%',top:'3.5rem',fontWeight:'bolder',fontSize:'1.5rem'}} onClick={()=>{
                 axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].todo.map((e)=>[e.user,e.title,e.id])
@@ -52,7 +53,7 @@ export default class ViewPage extends React.Component{
                     }}>
                         <h3>Created by :{e[0]}</h3>
                         <h1>Title : {e[1]}</h1>
-                        <h3>id : {e[2]}</h3>
+                       { /*<h3>id : {e[2]}</h3>*/}
                     </div>
                 })}
             </div>

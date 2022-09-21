@@ -60,6 +60,8 @@ const PollCardCustomer = (props) => {
           setIsVoted(true);
         } else {
           setNewVote(true);
+          window.location.reload(false)
+
           // alert("voted");
         }
       });
@@ -67,13 +69,17 @@ const PollCardCustomer = (props) => {
     // setGraph(true);
   };
 
+  const checkOptionVoted=(data2)=>{
+    for(var i=0;i<poll.options[data2].votedBy.length;i++){
+      if(poll.options[data2].votedBy[i]==localStorage.getItem("cName")){
+          return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <div>
-        <p style={{fontSize:'15px',color:'white',textAlign:'right',position:'absolute',top:'0',left:'20px'}}>&nbsp;Logged in as &nbsp;{localStorage.getItem("cName")} !</p>
-        <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
-            this.props.navigate("/cfront")
-            localStorage.removeItem("cName")
-            localStorage.removeItem("cEmail")}}>LogOut</button></p>
       <center>
         {poll ? (
           <div
@@ -99,6 +105,27 @@ const PollCardCustomer = (props) => {
             </p>
             <div>
               {Object.keys(poll.options).map((data2) => (
+                checkOptionVoted(data2)
+                ? <p>
+                  <button
+                    style={{
+                      backgroundColor: "#b5e550",
+                      borderRadius: "20px",
+                      paddingLeft: "10vh",
+                      paddingRight: "10vh",
+                      border: "0",
+                      cursor: "pointer",
+                      height: "6vh",
+                      width: "20vw",
+                    }}
+                    onClick={() => handleVote(data2)}
+                  >
+                    {" "}
+                    {poll.options[data2].option}
+                  </button>
+                </p>
+              
+                :
                 <p>
                   <button
                     style={{

@@ -28,7 +28,7 @@ function CreatePolls() {
       .catch((e) => {
         console.log(e);
       });
-    navigate("/showpoll",{ state: {code:"secret"} });
+    navigate("/pollhomepage",{ state: {code:"secret"} });
   };
 
   const handleChangeQuestion = (e) => {
@@ -79,6 +79,7 @@ function CreatePolls() {
 
         <input
           className="form-input"
+          required
           type="text"
           value={option}
           key={i}
@@ -110,13 +111,13 @@ function CreatePolls() {
     <div >
       <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
         <br></br><center><button onClick={()=>{
-            navigate("/login")
+            navigate("/")
             localStorage.removeItem("Name")}}>LogOut</button></center>
         <br></br>
         </p>
     <center >
     <div >
-      <h1 >Create Your Poll</h1>
+      <h1 style={{backgroundColor:"rgb(32,177,255)"}}>Create Your Poll</h1>
       <div
         style={{
           backgroundColor: "#D9D9D9",
@@ -133,6 +134,7 @@ function CreatePolls() {
           <br />
           <input
             className="form-input"
+            required
             type="text"
             name="question"
             value={state.question}

@@ -24,8 +24,9 @@ router.get("/users/:id",async function(req, res){
 router.get("/showans/:id",async function(req,res){
    answers.init()
    var t=await answers.findbyid(req.params.id)
+   console.log(t)
+   if(t.length>0){
    var ans=t[0].response.map((e)=>e.ans)
-
    var count= ans.length*ans[0].length
 o={}
 i=0
@@ -45,6 +46,10 @@ for(j=0;j<ans[0].length;j++){
     qidarry.push(ans[0][j].qid)
 }
 res.send([o,qidarry])
+   }
+   else{
+    res.send([])
+   }
    
 })
 
@@ -131,6 +136,7 @@ router.post("/newcustomer",async function(req,res){
     //console.log(cust)
     //res.send(cust[0].name)
    if(cust.length===0){
+    //res.send({message:"new user"})
         console.log("new cust")
         await customer.save(req.body)
         all=await axios.get("http://localhost:8000/user")
@@ -289,7 +295,9 @@ router.post("/newtheory/eid/:eid",async function(req,res){
     survey=req.body.survey;
     var user= await customer.find(customer.db);
     user.map(async (e)=>{
-        var utodo = [survey,...e.todo]
+        var utodo=e.todo.filter((t)=>t.id!=req.params.eid)
+
+        var utodo = [survey,...utodo]
         //console.log(e.complete)
         var ucomplete=e.complete.filter((t)=>t.id!=req.params.eid)
         //console.log(ucomplete)

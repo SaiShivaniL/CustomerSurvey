@@ -53,7 +53,7 @@ const CustomerPage = () => {
             <div className='cbox'>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px" />
             </div>
-            <h1>Cutomer Details</h1>
+            <h1>Customer Details</h1>
             <br></br>
             <p style={{color:"red",backgroundColor:"white",marginTop:"-8px"}}>{message}</p>
             <input  type="text" name="name" style={{marginTop:"-10px"}}value={user.name} placeholder="Enter your Name" onChange={handleChange}/>

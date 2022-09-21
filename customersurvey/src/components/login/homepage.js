@@ -28,7 +28,7 @@ const HomePage = () => {
         <div className="lpage">
         <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
         <br></br><center><button onClick={()=>{
-            navigate("/login")
+            navigate("/")
             localStorage.removeItem("Name")}}>LogOut</button></center>
         <br></br>
         </p>

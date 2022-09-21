@@ -61,9 +61,11 @@ const ShowGraph = (props) => {
 
   return (
     <div>
+    <center><h1 style={{backgroundColor:"#20b1ff"}}>Results</h1></center>
+        <br/>
       <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
         <br></br><center><button onClick={()=>{
-            navigate("/login")
+            navigate("/")
             localStorage.removeItem("Name")}}>LogOut</button></center>
         <br></br>
         </p>
@@ -76,14 +78,20 @@ const ShowGraph = (props) => {
             alignItems: "center",
           }}
         >
+        
           <div
             style={{
+              //new
+              margin:"5vh",
               padding: "10vh",
               width: "50vw",
               backgroundColor: "white",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              border:"0",
+    color:"#3562FF",
+    borderRadius: "20px",
             }}
           >
             <div>
@@ -109,6 +117,7 @@ const ShowGraph = (props) => {
           }}
         >
           <button onClick={barGraphButton}>Show BarGraph</button>
+          <br/>
         </div>
 
         {barGraphVisible ? (
@@ -119,6 +128,12 @@ const ShowGraph = (props) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              //new
+              margin:"5vh",
+              padding:"3vh",
+              border:"0",
+    color:"#3562FF",
+    borderRadius: "20px",
             }}
           >
             <div className="row">
@@ -152,4 +167,4 @@ const ShowGraph = (props) => {
   );
 };
 
-export default ShowGraph;
+export default ShowGraph

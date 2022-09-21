@@ -36,7 +36,7 @@ const LoginPage = () => {
             if(res.data.message==="Login Successfull")
             {
                 localStorage.setItem("Name",id)
-                navigate("/homepage",{ state: {code:"secret"} })
+                navigate("/SurveyPage",{ state: {code:"secret"} })
             }
         })
     }
@@ -60,7 +60,7 @@ const LoginPage = () => {
                 <HiOutlineIdentification size="40px"/><input type="text" name="id" value={user.id} placeholder="Employee Id" onChange={handleChange} style={{border:"none"}} />
     </div>*/}
             <input style={{fontFamily:"Font Awesome 5 Free"}} type="text" name="id" value={user.id} placeholder="&#xf007;&nbsp;&nbsp;&nbsp; Employee Id" onChange={handleChange}/>
-            <input style={{fontFamily:"Font Awesome 5 Free"}} type="password" name="password" value={user.password} placeholder="&#xf023;&nbsp;&nbsp;&nbsp; password" onChange={handleChange} />
+            <input style={{fontFamily:"Font Awesome 5 Free"}} type="password" name="password" value={user.password} placeholder="&#xf023;&nbsp;&nbsp;&nbsp; Password" onChange={handleChange} />
             <button className="llogin-btn" onClick={login}>Login <BiLogIn/></button>
 
         

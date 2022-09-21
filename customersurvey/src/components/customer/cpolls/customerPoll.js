@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import CNavigation from "../cnavigation";
 
 
 function CustomerPolls(props) {
@@ -54,10 +55,11 @@ function CustomerPolls(props) {
                     Completed Poll
                 </NavLink>
                 <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
-            this.props.navigate("/cfront")
+            navigate("/")
             localStorage.removeItem("cName")
             localStorage.removeItem("cEmail")}}>LogOut</button></p>
             </nav>
+            <CNavigation/>
             <center>
         {Object.keys(polls).map((data) =>
           data === "user" || containsUser(polls[data].users) ? (

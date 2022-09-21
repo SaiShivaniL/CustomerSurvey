@@ -1,72 +1,101 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import CNavigation from "../cnavigation";
 
 function CompletedPolls(props) {
-    const navigate=useNavigate()
-    const abc = path => {
+  const navigate = useNavigate();
+  const abc = (path) => {
     navigate(path);
+  };
+  const [polls, setPolls] = useState({});
+  // const handleClick = (id) => history.push(`/poll/${id}`);
+  useEffect(() => {
+    // Update the document title using the browser API
+    const id = localStorage.getItem("cName");
+    console.log(id);
+    const headers = {
+      "Content-Type": "application/json",
+      user_id: id,
     };
-    const [polls, setPolls] = useState({});
-    // const handleClick = (id) => history.push(`/poll/${id}`);
-    useEffect(() => {
-      // Update the document title using the browser API
-     const id = localStorage.getItem("cName")
-     console.log(id)
-      const headers = {
-        "Content-Type": "application/json",
-        "user_id":id
-      };
-      fetch("http://localhost:5055/poll", { headers })
-        .then((response) => response.json())
-        .then((data) => {
-          setPolls(data);
-          // console.log(polls
-          //   )
-        });
-    }, []);
-    const valuesArray = JSON.parse(JSON.stringify(polls));
-    // console.log(Object.keys(polls[8].options));
-    const containsUser = (e)=>{
-        // console.log(e)
-        for(var i = 0; i<e.length; i++){
-            if(e[i] === localStorage.getItem("cName")){
-                return true
-            }
-            
-        }
-        return false
+    fetch("http://localhost:5055/poll", { headers })
+      .then((response) => response.json())
+      .then((data) => {
+        setPolls(data);
+        // console.log(polls
+        //   )
+      });
+  }, []);
+  const valuesArray = JSON.parse(JSON.stringify(polls));
+  // console.log(Object.keys(polls[8].options));
+  const containsUser = (e) => {
+    // console.log(e)
+    for (var i = 0; i < e.length; i++) {
+      if (e[i] === localStorage.getItem("cName")) {
+        return true;
       }
-    
-  
-    return (
-      <div>
-        {/* {JSON.stringify(polls)} */}
+    }
+    return false;
+  };
 
-        <nav style={{position:"fixed",top:"0",width:"100%",backgroundColor:"blue",textAlign:"center",height:"3rem"}}>
+  const checkOptionVoted = (data, data2) => {
+    for (var i = 0; i < polls[data].options[data2].votedBy.length; i++) {
+      if (
+        polls[data].options[data2].votedBy[i] == localStorage.getItem("cName")
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  return (
+    <div>
+      {/* {JSON.stringify(polls)} */}
+
+      <nav
+        style={{
+          position: "fixed",
+          top: "0",
+          width: "100%",
+          backgroundColor: "blue",
+          textAlign: "center",
+          height: "3rem",
+        }}
+      >
         <p style={{fontSize:'15px',color:'white',textAlign:'right',position:'absolute',top:'0',left:'20px'}}>&nbsp;Logged in as &nbsp;{localStorage.getItem("cName")} !</p>
-                <NavLink to="/customerPoll"   style={({ isActive }) => ({color:'white',borderBottom:isActive?'2px solid white':'',textDecoration:'none',backgroundColor:'blue'})}>
-                    Polls to Complete
-                </NavLink>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <NavLink to="/completedPoll"  style={({ isActive }) => ({color:'white',borderBottom:isActive?'2px solid white':'',textDecoration:'none',backgroundColor:'blue'})}>
-                    Completed Poll
-                </NavLink>
-                <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
-            this.props.navigate("/cfront")
+        <NavLink
+          to="/customerPoll"
+          style={({ isActive }) => ({
+            color: "white",
+            borderBottom: isActive ? "2px solid white" : "",
+            textDecoration: "none",
+            backgroundColor: "blue",
+          })}
+        >
+          Polls to Complete
+        </NavLink>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <NavLink
+          to="/completedPoll"
+          style={({ isActive }) => ({
+            color: "white",
+            borderBottom: isActive ? "2px solid white" : "",
+            textDecoration: "none",
+            backgroundColor: "blue",
+          })}
+        >
+          Completed Poll
+        </NavLink>
+        <p><button style={{position:'absolute',top:'0',right:'20px'}} onClick={()=>{
+            navigate("/")
             localStorage.removeItem("cName")
             localStorage.removeItem("cEmail")}}>LogOut</button></p>
-            </nav>
-           
-            
-
-
-
-
-        <center>
+      </nav>
+      <CNavigation/>
+      <center>
         {Object.keys(polls).map((data) =>
-            data === "user" || !containsUser(polls[data].users) ? (
+          data === "user" || !containsUser(polls[data].users) ? (
             <div></div>
           ) : (
             <div
@@ -92,24 +121,36 @@ function CompletedPolls(props) {
                 {polls[data].question}
               </button>
               <div>
-                {Object.keys(polls[data].options).map((data2) => (
-                  <p
-                    style={{
-                      padding: "10px",
-                      backgroundColor: "white",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    {polls[data].options[data2].option}
-                  </p>
-                ))}
+                {Object.keys(polls[data].options).map((data2) =>
+                  checkOptionVoted(data, data2) ? (
+                    <p
+                      style={{
+                        padding: "10px",
+                        backgroundColor: "#b5e550",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {polls[data].options[data2].option}
+                    </p>
+                  ) : (
+                    <p
+                      style={{
+                        padding: "10px",
+                        backgroundColor: "white",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {polls[data].options[data2].option}
+                    </p>
+                  )
+                )}
               </div>
             </div>
           )
         )}
-        </center>
-      </div>
-    );
-  }
-  
-  export default CompletedPolls;
+      </center>
+    </div>
+  );
+}
+
+export default CompletedPolls;

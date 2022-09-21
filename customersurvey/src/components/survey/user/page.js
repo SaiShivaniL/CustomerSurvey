@@ -3,6 +3,7 @@ import axios from "axios"
 import "./page.css"
 import {Link} from "react-router-dom"
 import {useNavigate} from "react-router-dom";
+import Navigation from '../../login/navigation';
 
 export default class Page extends React.Component{
     constructor() {
@@ -39,11 +40,8 @@ export default class Page extends React.Component{
         // var a = axios.get("http://localhost:8000/api").then((data)=>this.setState({survey:data}))
         return (
                 <div>
-                    <h1 className="title" >Feedback</h1>
-                    <p style={{"position":"absolute","top":0,"right":25,color:"white"}}>&nbsp;Logged in by {localStorage.getItem("Name")}&nbsp;&nbsp;&nbsp;
-                     <center><button onClick={()=>{this.props.navigate("/login")
-            localStorage.removeItem("Name")}}>LogOut</button></center>
-                    </p>
+                    
+                    <Navigation/>
                     {/*<Link to="create"><button className="create" >+</button></Link>*/}
                     <button className="create" onClick={()=>this.props.navigate("/create",{ state: {code:"secret"} })}>+</button>
                     <button className="refresh" onClick={()=>{
@@ -57,7 +55,7 @@ export default class Page extends React.Component{
                         {this.state.survey.map((e)=>{
                             return <div key={e.id} className='content'>
                                 <h1>{e.title}</h1>
-                                <h3>id : {e.id}</h3>
+                                {/*<h3>Created on : {a}</h3>*/}
                                 <button style={{marginLeft:"2rem",marginRight:"2rem"}} onClick={()=>{
                                     localStorage.setItem("viewId", e.id)
                                     this.props.navigate("/view",{ state: {code:"secret"} })
@@ -71,6 +69,10 @@ export default class Page extends React.Component{
                                     var f=this.state.survey.filter((x)=>x.id!==e.id);
                                     this.setState({survey:f})
                             }}>Delete</button>
+                             <button onClick={()=>{
+                                    localStorage.setItem("GraphId", e.id)
+                                    this.props.navigate("/GraphPage",{ state: {code:"secret"} })
+                                }}>survey graph</button>
                             </div>
                         })}
 
