@@ -29,10 +29,15 @@ const CustomerPage = () => {
         if(name && email){
             if(emx.test(email)){
                 axios.post("http://localhost:8000/newcustomer",final).then((res)=>{
-                    if(res.data.message==="posted"){
-                    localStorage.setItem("cEmail",email)
-                    localStorage.setItem("cName",name)
-                    navigate("/coptions")}
+                    if(res.data.message==="new user"){
+                        localStorage.setItem("cEmail",email)
+                        localStorage.setItem("cName",name)
+                    navigate("/otpc")}
+                    else if(res.data.message==="posted"){
+                        localStorage.setItem("cEmail",email)
+                        localStorage.setItem("cName",name)
+                        navigate("/coptions")
+                    }
                     else{
                         setMessage(res.data.message)
                     }

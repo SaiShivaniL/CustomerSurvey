@@ -20,6 +20,7 @@ import CompletePage from './components/customer/completed';
 import Userview from './components/customer/userview';
 import EditMain from './components/edit/editmain';
 import Question from './components/edit/equestion';
+import OTPPageC from './components/customer/otpc';
 
 import CreatePolls from "./components/poll/CreatePolls";
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/view" element={<View navigate={navigate} location={useLocation()}/>} />
           <Route path="/cfront" element={<CustomerPage />} />
           <Route path="/coptions" element={<CsurveyPage />} />
+          <Route path="/otpc" element={<OTPPageC />} />
           <Route path="/viewpage" element={<ViewPage navigate={navigate} location={useLocation()}/>} />
           <Route path="/complete" element={<CompletePage navigate={navigate} />}/>
           <Route path="/userview" element={<Userview navigate={navigate} location={useLocation()}/>}/>

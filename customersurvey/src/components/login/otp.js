@@ -49,7 +49,7 @@ const OTPPage = () => {
                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px"/>
              
-            <h1>update password</h1>
+            <h1>Update Password</h1>
             <p style={{color:"red"}}>{message}</p>
             <input type="text" name="otp" placeholder="Enter OTP Received" value={user.otp} onChange={handleChange} />
             <input type="text" name="email" placeholder="&#xf0e0;&nbsp;&nbsp;&nbsp;Enter email" value={user.email} onChange={handleChange}/>

@@ -340,6 +340,7 @@ app.post("/forgot",async (req,res)=>{
     var {email}=req.body
     User.findOne({email: email},async (err,user)=>{
         if(user){
+          await Otp.deleteMany({email:req.body.email})
         let otpcode=Math.floor((Math.random()*10000)+1);
         let otpData=new Otp({email:req.body.email,otp:otpcode,expireIn:new Date().getTime()+300*1000
         })
@@ -359,7 +360,7 @@ app.post("/forgot",async (req,res)=>{
             from:'saishivani.wnp@gmail.com',
             to:email,
             subject:'OTP',
-            text:'OTP for updating password  in Survey Application is : '+otpcode+'OTP will expire in 5 mins'
+            text:'OTP for updating password in Survey Application is : '+otpcode+' OTP will expire in 5 mins'
         }
         transporter.sendMail(mailOptions,function(error,info){
             if(error){
@@ -377,6 +378,7 @@ app.post("/forgot",async (req,res)=>{
         }
     })
 })
+
 app.post("/change",async (req,res)=>{
     let data=await Otp.findOne({email:req.body.email,otp:req.body.otp})
     console.log(data)
@@ -418,6 +420,99 @@ app.post("/change",async (req,res)=>{
         res.send({message:"invalid otp"})
     }
 })
+
+
+
+
+app.post("/otp",async function(req,res){
+   var {email}=req.body
+   console.log(req.body.email)
+  /* let c=0
+   let data=await Otp.findOne({email:req.body.email})
+   if(data!=null){
+    Otp.deleteOne({email:req.body.email,otp:req.body.otp},function (err, docs) {
+      if (err){
+          console.log(err)
+      }
+      else{
+        c=1
+          console.log("Deleted User : ",docs);
+      }})    
+   }
+   if(c==1||c==0){*/
+       await Otp.deleteMany({email:req.body.email})
+       let otpcode=Math.floor((Math.random()*10000)+1);
+       let otpData=new Otp({email:req.body.email,otp:otpcode,expireIn:new Date().getTime()+300*1000
+       })
+       let otpresponse=await otpData.save();
+       //var nodemailer=require('nodemailer')
+       var transporter=nodemailer.createTransport({
+           service:'gmail',
+           port:587,
+           secure:false,
+           auth:{
+               user:'saishivani.wnp@gmail.com',
+               pass:'ctghifedvjojtntg'
+           }
+       });
+       var mailOptions={
+           from:'saishivani.wnp@gmail.com',
+           to:email,
+           subject:'OTP',
+           text:'OTP for email validation: '+otpcode+' OTP will expire in 5 mins'
+       }
+       transporter.sendMail(mailOptions,function(error,info){
+           if(error){
+               console.log(error)
+           }
+           else{
+               console.log('Email sent'+info.response)
+           }
+       })
+      //}
+       res.send({message:"Please Check your email id"})
+       //console.log(otpcode)
+})
+
+app.post("/checkotp",async function(req,res){
+  console.log(req.body)
+  let data=await Otp.findOne({email:req.body.email,otp:req.body.otp})
+  console.log(data)
+  console.log(req.body.otp)
+  const response={}
+  if(data!=null){
+      let currentTime=new Date().getTime();
+      console.log("expire : "+data.expireIn+" current : "+currentTime)
+      let diff=data.expireIn-currentTime
+      console.log(diff)
+      if(diff<0){
+          res.send({message:"OTP Expired"})
+          Otp.deleteOne({email:req.body.email,otp:req.body.otp},function (err, docs) {
+              if (err){
+                  console.log(err)
+              }
+              else{
+                  console.log("Deleted User : ",docs);
+              }
+          })
+      }
+      else{
+        res.send({message:"success"})
+          Otp.deleteOne({email:req.body.email,otp:req.body.otp},function (err, docs) {
+              if (err){
+                  console.log(err)
+              }
+              else{
+                  console.log("Deleted User : ",docs);
+              }
+          })
+      }
+  }else{
+      res.send({message:"invalid otp"})
+  }
+})
+
+
 app.listen(5055,()=>{
     console.log("server Started at port 5055")
 })

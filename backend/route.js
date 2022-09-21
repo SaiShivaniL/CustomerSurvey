@@ -8,6 +8,7 @@ var user=new mongodb("EmployeeQuestion")
 var customer=new mongodb("customers")
 var answers=new mongodb("answers")
 var users=new mongodb("users")
+var otp=new mongodb("Otp")
 
 
 
@@ -130,14 +131,8 @@ router.get("/customer/:email",async function(req,res){
     v=await customer.findbyemail(req.params.email)
     res.send(v)
 })
-router.post("/newcustomer",async function(req,res){
-    customer.init();
-    cust=await customer.findbyemail(req.body.email)
-    //console.log(cust)
-    //res.send(cust[0].name)
-   if(cust.length===0){
-    //res.send({message:"new user"})
-        console.log("new cust")
+router.post("/custdatbase",async function(req,res){
+        customer.init()
         await customer.save(req.body)
         all=await axios.get("http://localhost:8000/user")
         survey=all.data.map((e)=>e.survey).flat()
@@ -145,6 +140,24 @@ router.post("/newcustomer",async function(req,res){
         console.log(email)
         customer.update({email:email},{todo:survey})
         res.send({message:"posted"})
+})
+router.post("/newcustomer",async function(req,res){
+    customer.init();
+    cust=await customer.findbyemail(req.body.email)
+    //console.log(cust)
+    //res.send(cust[0].name)
+    console.log(req.body.email)
+   if(cust.length===0){
+       axios.post("http://localhost:5055/otp",{email:req.body.email})
+       res.send({message:"new user"})
+        /*console.log("new cust")
+        await customer.save(req.body)
+        all=await axios.get("http://localhost:8000/user")
+        survey=all.data.map((e)=>e.survey).flat()
+        email=req.body.email
+        console.log(email)
+        customer.update({email:email},{todo:survey})
+        res.send({message:"posted"})*/
     }
     else if(cust[0].name===req.body.name){
         res.send({message:"posted"})
@@ -299,7 +312,7 @@ router.post("/newtheory/eid/:eid",async function(req,res){
 
         var utodo = [survey,...utodo]
         //console.log(e.complete)
-        var ucomplete=e.complete.filter((t)=>t.id!=req.params.eid)
+        var ucomplete=e.complete.filter((t)=>{t.id!=req.params.eid})
         //console.log(ucomplete)
         
        await customer.update({email:e.email},{todo:utodo,complete:ucomplete})
