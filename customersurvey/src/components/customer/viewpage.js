@@ -13,13 +13,14 @@ export default class ViewPage extends React.Component{
         }
     }
     componentDidMount(){
+        if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
         axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].todo.map((e)=>[e.user,e.title,e.id])
-                    this.setState({list:x})})
+                    this.setState({list:x})})}else{this.props.navigate("/cfront")}
     }
 
     render(){
-        {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
+        {if(!localStorage.getItem("cName") || !localStorage.getItem("cEmail")){
             this.props.navigate("/cfront")
       }}
         return <div>
@@ -39,10 +40,11 @@ export default class ViewPage extends React.Component{
             </nav>
            <CNavigation/>
             <button style={{position:'fixed',right:'2%',top:'3.5rem',fontWeight:'bolder',fontSize:'1.5rem'}} onClick={()=>{
+                 if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
                 axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].todo.map((e)=>[e.user,e.title,e.id])
                     this.setState({list:x})
-                })
+                })}else{this.props.navigate("/cfront")}
             }}>&#8635;</button>
             <div style={{marginTop:"4rem"}}></div>
             <center>

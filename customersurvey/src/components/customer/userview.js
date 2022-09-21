@@ -39,7 +39,7 @@ export default class Userview extends React.Component{
         }
     
     render(){
-        {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
+        {if(!localStorage.getItem("cName") || !localStorage.getItem("cEmail")){
             this.props.navigate("/cfront")
       }}
         return (
@@ -75,6 +75,7 @@ export default class Userview extends React.Component{
                  
                         }
                         if(this.state.message===""){
+                            if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
                            axios.post("http://localhost:8000/addres",{id:this.state.id,name:this.state.name,title:this.state.title,email:localStorage.getItem("cEmail"),ans:this.state.final}).then((d)=>console.log(d.data)).then(()=>{
                                 axios.patch("http://localhost:8000/"+localStorage.getItem("cEmail")+"/addtocomp",{id:this.state.id}).then(()=>{
                                     this.props.navigate(-1)
@@ -83,6 +84,7 @@ export default class Userview extends React.Component{
                             })
                            // console.log(this.state.title,this.state.final,this.state.name)
                          }
+                        }else{this.props.navigate("/cfront")}
                     }
 
                     )

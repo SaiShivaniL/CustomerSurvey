@@ -1,14 +1,17 @@
 import React from "react";
 import "../login/login.css";
 import {FaPoll} from 'react-icons/fa'
+import { useEffect } from "react";
 import {RiSurveyLine} from 'react-icons/ri'
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 const CsurveyPage = () => {
     const navigate=useNavigate() 
-    {if(!localStorage.getItem("cName") && !localStorage.getItem("cEmail")){
-        this.props.navigate("/cfront")
-    }}    
+    useEffect(()=>{
+        if(!localStorage.getItem("cName") || !localStorage.getItem("cEmail")){
+            navigate("/cfront")
+    }   
+    },[]);
     return (
       <div className="lpage">
           <p className="loginname">&nbsp;Logged in by &nbsp;<br></br> {localStorage.getItem("cName")}&nbsp;&nbsp;&nbsp;
