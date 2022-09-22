@@ -1,11 +1,12 @@
 {
   "name": "loginandregister-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
+  "description": "",
   "type": "module",
-  "script": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" :"npx nodemon index.js"
+    "start" :"nodemon main.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,8 +18,7 @@
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19"
   },
-  "description": "",
   "engines": {
-    "node":"16.17.0"
+    "node": "16.17.0"
   }
 }
