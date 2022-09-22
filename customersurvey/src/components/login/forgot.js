@@ -17,17 +17,17 @@ const ForgotPage = () => {
             ...user,
             [name]:value
         })
-        console.log(name,value)
+        
     }
     
     const forgot=()=>{
         const {email}=user
         var emx=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
         if(emx.test(email)){
-            axios.post("http://localhost:5055/forgot",user).then(
+            axios.post("https://backendnodejscs1.herokuapp.com/forgot",user).then(
                 res=>{
                     setMessage(res.data.message)
-                    console.log(res.data.message)
+                    
                     if(res.data.message==="Please Check your email id")
                     {
                         navigate("/OTPpage")

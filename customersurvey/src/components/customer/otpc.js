@@ -15,17 +15,15 @@ const OTPPageC = () => {
             ...user,
             [name]:value
         })
-        console.log(name,value)
     }
     const Update=()=>{
         const {otp}=user
         const final={email:localStorage.getItem("cEmail"),otp:otp}
         const final1={name:localStorage.getItem("cName"),email:localStorage.getItem("cEmail"),todo:[],complete:[]}
         if(otp){
-           axios.post("http://localhost:5055/checkotp",final).then((res)=>{
-            console.log(res.data.message)
+           axios.post("https://backendnodejscs1.herokuapp.com/checkotp",final).then((res)=>{
             if(res.data.message==="success"){
-               axios.post("http://localhost:8000/custdatbase",final1)
+               axios.post("https://backendapicasestudy.herokuapp.com/custdatbase",final1)
                navigate("/coptions")
             }else if(res.data.message==="invalid otp"){
                 setMessage("Otp is invalid")

@@ -13,12 +13,11 @@ export default class Page extends React.Component{
         }
     }
     componentDidMount(){
-        console.log("entered page.js")
+        
         if(!localStorage.getItem("Name")){
-            console.log("got in")
          this.props.navigate("/login")
         }
-        let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
+        let a=axios.get("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name"));
                         a.then((data)=>{
                             var b=data.data[0].survey.reverse();
                             this.setState({survey:b})
@@ -27,21 +26,18 @@ export default class Page extends React.Component{
     render(){
         var {state}=this.props.location
         var {code}=!state?{code:"notsecret"}:state
-        console.log(code,localStorage.getItem("Name"))
         if(code==="notsecret"){
-            console.log("got into")
             this.props.navigate("/login")
         }
         else if(!localStorage.getItem("Name")){
-            console.log("got in a")
          this.props.navigate("/login")
         }
-        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+        axios.get("https://backendapicasestudy.herokuapp.com/users/"+localStorage.getItem("Name")).then((data)=>{
             if(data.data.length===0){
                this.props.navigate("/login")
             }
           })
-        // var a = axios.get("http://localhost:8000/api").then((data)=>this.setState({survey:data}))
+        // var a = axios.get("https://backendapicasestudy.herokuapp.com/api").then((data)=>this.setState({survey:data}))
         return (
                 <div>
                     
@@ -50,7 +46,7 @@ export default class Page extends React.Component{
                     <button className="create" onClick={()=>this.props.navigate("/create",{ state: {code:"secret"} })}>+</button>
                     <button className="refresh" onClick={()=>{
                         if(localStorage.getItem("Name")){
-                        let a=axios.get("http://localhost:8000/user/"+localStorage.getItem("Name"));
+                        let a=axios.get("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name"));
                         a.then((data)=>{
                             var b=data.data[0].survey.reverse();
                             this.setState({survey:b})
@@ -71,7 +67,7 @@ export default class Page extends React.Component{
                                 }}>edit</button>
                                 <button style={{marginLeft:"2rem",marginRight:"2rem"}} onClick={()=>{
                                     if(localStorage.getItem("Name"))
-                                    {axios.delete("http://localhost:8000/user/"+localStorage.getItem("Name")+"/"+e.id)
+                                    {axios.delete("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name")+"/"+e.id)
                                     var f=this.state.survey.filter((x)=>x.id!==e.id);
                                     this.setState({survey:f})}else{this.props.navigate("/login")}
                             }}>Delete</button>

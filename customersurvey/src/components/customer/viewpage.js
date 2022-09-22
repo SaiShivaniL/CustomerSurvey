@@ -14,7 +14,7 @@ export default class ViewPage extends React.Component{
     }
     componentDidMount(){
         if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
-        axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
+        axios.get("https://backendapicasestudy.herokuapp.com/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].todo.map((e)=>[e.user,e.title,e.id])
                     this.setState({list:x})})}else{this.props.navigate("/cfront")}
     }
@@ -41,7 +41,7 @@ export default class ViewPage extends React.Component{
            <CNavigation/>
             <button style={{position:'fixed',right:'2%',top:'3.5rem',fontWeight:'bolder',fontSize:'1.5rem'}} onClick={()=>{
                  if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
-                axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
+                axios.get("https://backendapicasestudy.herokuapp.com/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].todo.map((e)=>[e.user,e.title,e.id])
                     this.setState({list:x})
                 })}else{this.props.navigate("/cfront")}
@@ -52,7 +52,6 @@ export default class ViewPage extends React.Component{
                 {this.state.list.map((e)=>{
                     return <div key={e[2]} style={{margin:"2rem",padding:"1rem",backgroundColor:"rgb(243,243,243)",width:"70%",height:"auto",borderRadius:"8px",cursor:"pointer"}} onClick={()=>{
                         this.setState({view:[...e]},()=>{
-                            console.log(this.state.view)
                             this.props.navigate('/userview', { state: { id: this.state.view[2], name: this.state.view[0],title: this.state.view[1] } });
                         })
                     }}>

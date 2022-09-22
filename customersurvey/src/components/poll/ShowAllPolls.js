@@ -13,21 +13,19 @@ function ShowAllPolls(props) {
   useEffect(() => {
     // Update the document title using the browser API
    const id = localStorage.getItem("Name")
-   console.log(id)
     const headers = {
       "Content-Type": "application/json",
       "user_id":id
     };
-    fetch("http://localhost:5055/poll", { headers })
+    fetch("https://backendnodejscs1.herokuapp.com/poll", { headers })
       .then((response) => response.json())
       .then((data) => {
         setPolls(data);
-        // console.log(polls
-        //   )
+
       });
   }, []);
   const valuesArray = JSON.parse(JSON.stringify(polls));
-  // console.log(Object.keys(polls[8].options));
+  
 
   
 

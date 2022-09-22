@@ -28,12 +28,12 @@ const ShowGraph = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     const user_id = localStorage.getItem("Name");
-    console.log(user_id);
+   
     const headers = {
       "Content-Type": "application/json",
       user_id: user_id,
     };
-    fetch("http://localhost:5055/poll", { headers })
+    fetch("https://backendnodejscs1.herokuapp.com/poll", { headers })
       .then((response) => response.json())
       .then((data) => {
         console.log(id);
@@ -45,8 +45,7 @@ const ShowGraph = (props) => {
           opt.labels.push(poll.options[k].option);
           ser.push(poll.options[k].votes);
         });
-        console.log(options);
-        console.log(series);
+      
         setOptions(opt);
         setSeries(ser);
         setGraph(true);
@@ -57,7 +56,7 @@ const ShowGraph = (props) => {
   const barGraphButton = () => {
     setBarGraphVisible(true);
   };
-  //   console.log(poll);
+  
 
   return (
     <div>

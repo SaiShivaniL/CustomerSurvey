@@ -25,9 +25,8 @@ export default class Userview extends React.Component{
     async componentDidMount(){
         var {state}=this.props.location;
         var {id,name,title}=state;
-       // console.log(title)
         this.setState({id:id,name:name,title:title})
-        var d=await axios.get("http://localhost:8000/user/"+name+"/id/"+id)
+        var d=await axios.get("https://backendapicasestudy.herokuapp.com/user/"+name+"/id/"+id)
             this.setState({survey:d.data},()=>{
             var arry=[]
             var qsn=this.state.survey.question
@@ -76,13 +75,12 @@ export default class Userview extends React.Component{
                         }
                         if(this.state.message===""){
                             if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
-                           axios.post("http://localhost:8000/addres",{id:this.state.id,name:this.state.name,title:this.state.title,email:localStorage.getItem("cEmail"),ans:this.state.final}).then((d)=>console.log(d.data)).then(()=>{
-                                axios.patch("http://localhost:8000/"+localStorage.getItem("cEmail")+"/addtocomp",{id:this.state.id}).then(()=>{
+                           axios.post("https://backendapicasestudy.herokuapp.com/addres",{id:this.state.id,name:this.state.name,title:this.state.title,email:localStorage.getItem("cEmail"),ans:this.state.final}).then((d)=>console.log(d.data)).then(()=>{
+                                axios.patch("https://backendapicasestudy.herokuapp.com/"+localStorage.getItem("cEmail")+"/addtocomp",{id:this.state.id}).then(()=>{
                                     this.props.navigate(-1)
                                 })
                                 
                             })
-                           // console.log(this.state.title,this.state.final,this.state.name)
                          }
                         }else{this.props.navigate("/cfront")}
                     }

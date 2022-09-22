@@ -18,14 +18,14 @@ const OTPPage = () => {
             ...user,
             [name]:value
         })
-        console.log(name,value)
+    
     }
     const Update=()=>{
         const {otp,email,password,reEnterPassword}=user
         
         if(otp && password && email){
             if(password===reEnterPassword){
-        axios.post("http://localhost:5055/change",user)
+        axios.post("https://backendnodejscs1.herokuapp.com/change",user)
         .then( res=>{
             setMessage(res.data.message)
             if(res.data.message==="OTP Expired"){

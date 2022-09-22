@@ -12,7 +12,7 @@ export default function PollHomePage() {
   };
   var {state}=useLocation()
     var {code}=state || "notsecret"
-   console.log("insurvey=",code)
+   
     useEffect(()=>{
         if(code==="notsecret"){
             navigate('/login')
@@ -20,7 +20,7 @@ export default function PollHomePage() {
         if(!localStorage.getItem("Name")){
          navigate("/login")
         }
-         axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+         axios.get("https://backendapicasestudy.herokuapp.com/users/"+localStorage.getItem("Name")).then((data)=>{
           if(data.data.length===0){
              navigate("/login")
           }

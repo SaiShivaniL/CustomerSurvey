@@ -18,7 +18,7 @@ const HomePage = () => {
         if(!localStorage.getItem("Name")){
          navigate("/login")
         }
-         axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+         axios.get("https://backendapicasestudy.herokuapp.com/users/"+localStorage.getItem("Name")).then((data)=>{
           if(data.data.length===0){
              navigate("/login")
           }
@@ -34,7 +34,7 @@ const HomePage = () => {
         </p>
         
        <div className="lcover">
-           {console.log(localStorage.getItem("Name"))}
+           
             <button className="survey-btn" onClick={()=>navigate("/SurveyPage",{ state: {code:"secret"} })} >Create Survey <AiOutlineFileAdd/></button>
             <button className="survey-btn" onClick={()=>navigate('/GraphPage',{ state: {code:"secret"} })}>Survey Reports  <VscGraphLine/></button>
         </div>                

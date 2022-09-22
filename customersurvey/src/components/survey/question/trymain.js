@@ -31,16 +31,15 @@ export default class TryMain extends React.Component{
     render(){
         var {state}=this.props.location
         var {code}=!state?{code:"notsecret"}:state
-        console.log(code,localStorage.getItem("Name"))
         if(code==="notsecret"){
-            console.log("got into")
+            
             this.props.navigate("/login")
         }
         else if(!localStorage.getItem("Name")){
-            console.log("got in")
+           
            this.props.navigate("/login")
         }
-        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+        axios.get("https://backendapicasestudy.herokuapp.com/users/"+localStorage.getItem("Name")).then((data)=>{
             if(data.data.length===0){
                this.props.navigate("/login")
             }
@@ -113,8 +112,8 @@ export default class TryMain extends React.Component{
                       });
                     this.setState({msgshow:false,submitqsn:{username:localStorage.getItem("Name"),survey:{user:localStorage.getItem("Name"),id:id,title:this.state.title,question:sorted}}},()=>{
                         if(localStorage.getItem("Name")){
-                        axios.post("http://localhost:8000/user",this.state.submitqsn).then(async ()=>{
-                        await axios.post("http://localhost:8000/addquestion",this.state.submitqsn)
+                        axios.post("https://backendapicasestudy.herokuapp.com/user",this.state.submitqsn).then(async ()=>{
+                        await axios.post("https://backendapicasestudy.herokuapp.com/addquestion",this.state.submitqsn)
                         this.props.navigate("/Page",{ state: {code:"secret"} })    
                         })
                     }else{this.props.navigate("/login")}

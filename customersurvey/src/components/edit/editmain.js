@@ -26,7 +26,7 @@ export default class EditMain extends React.Component{
 
     async componentDidMount(){ 
      if(localStorage.getItem("Name")){
-    var d=await axios.get("http://localhost:8000/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("EditId"))
+    var d=await axios.get("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("EditId"))
         this.setState({survey:d.data},()=>{
             var arryanswer = this.state.survey.question.map((x)=>{
                 return [x.qid,<Question length={x.qid} getqsn={this.getQuestion} qn={x.qn} type={x.type} option={x.option} required={x.required}/>]
@@ -108,9 +108,8 @@ export default class EditMain extends React.Component{
                       });
                     this.setState({msgshow:false,submitqsn:{username:localStorage.getItem("Name"),survey:{user:localStorage.getItem("Name"),id:id,title:this.state.title,question:sorted}}},()=>{
                         if(localStorage.getItem("Name")){
-                        console.log(this.state.submitqsn)
-                        axios.patch("http://localhost:8000/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("EditId"),this.state.submitqsn).then(()=>{
-                        axios.post("http://localhost:8000/newtheory/eid/"+localStorage.getItem("EditId"),this.state.submitqsn)    
+                        axios.patch("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("EditId"),this.state.submitqsn).then(()=>{
+                        axios.post("https://backendapicasestudy.herokuapp.com/newtheory/eid/"+localStorage.getItem("EditId"),this.state.submitqsn)    
                         this.props.navigate("/Page",{ state: {code:"secret"} })})
                         }else{
                             this.props.navigate("/login")

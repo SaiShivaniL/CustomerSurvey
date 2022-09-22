@@ -20,7 +20,7 @@ const RegisterPage = () => {
             ...user,
             [name]:value
         })
-        console.log(name,value)
+        
     }
     const register = ()=>{
         const {id,email,password,reEnterPassword}=user
@@ -36,7 +36,7 @@ const RegisterPage = () => {
                  
                 if(password===reEnterPassword){
                 //alert("posted!")
-            axios.post("http://localhost:5055/register",user)
+            axios.post("https://backendnodejscs1.herokuapp.com/register",user)
             .then(res=> {
                 alert(res.data.message)
             })
@@ -61,7 +61,7 @@ else{
     return (
         <div className="rpage">
         <div className="rcover">
-            {console.log("User",user)}
+           
             <div className='rbox'>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px"/>
             </div>

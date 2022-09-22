@@ -15,7 +15,7 @@ function All() {
         if(localStorage.getItem("Name")){
         async function getdata() {
             var d = await axios.get(
-                "http://localhost:8000/showans/"+localStorage.getItem("GraphId")
+                "https://backendapicasestudy.herokuapp.com/showans/"+localStorage.getItem("GraphId")
             );
             if(d.data.length===0){
             setMsg("No user has responded to this quiz")}

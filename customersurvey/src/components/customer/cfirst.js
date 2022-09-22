@@ -19,7 +19,6 @@ const CustomerPage = () => {
             ...user,
             [name]:value
         })
-        //console.log(name,value)
     }
 
     const customer=()=>{
@@ -28,7 +27,7 @@ const CustomerPage = () => {
         var emx=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
         if(name && email){
             if(emx.test(email)){
-                axios.post("http://localhost:8000/newcustomer",final).then((res)=>{
+                axios.post("https://backendapicasestudy.herokuapp.com/newcustomer",final).then((res)=>{
                     if(res.data.message==="new user"){
                         localStorage.setItem("cEmail",email)
                         localStorage.setItem("cName",name)

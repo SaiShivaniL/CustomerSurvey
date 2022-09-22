@@ -18,30 +18,29 @@ const Pollcard = (props) => {
   // const handleClick = (id) => history.push(`/poll/${id}`);
   useEffect(() => {
     // Update the document title using the browser API
-    // console.log(props)
+   
     const user_id = localStorage.getItem("Name");
 
-    console.log("here");
-    console.log(user_id);
+    
     const headers = {
       "Content-Type": "application/json",
       user_id: user_id,
     };
-    fetch("http://localhost:5055/poll", { headers })
+    fetch("https://backendnodejscs1.herokuapp.com/poll", { headers })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setPoll(data[id]);
       });
   }, [id]);
-  console.log({ poll });
+  
 
   const deletePoll = (id) =>{
 
     const user_id = localStorage.getItem("Name");
 
-    const postURL = `http://localhost:5055/poll/${poll._id}`; //Our previously set up route in the backend
-    // console.log("her/e");
+    const postURL = `https://backendnodejscs1.herokuapp.com/poll/${poll._id}`; //Our previously set up route in the backend
+    
     fetch(postURL, {
       method: "DELETE",
       headers: {
@@ -52,7 +51,6 @@ const Pollcard = (props) => {
 
       .then((response) => {response.json()
 
-      // console.log(response)
 
       alert("deleted")
 
@@ -64,8 +62,8 @@ const Pollcard = (props) => {
 
   const handleVote = (key) => {
     const user_id = localStorage.getItem("Name");
-    const postURL = `http://localhost:5055/vote/${poll._id}`; //Our previously set up route in the backend
-    console.log("here");
+    const postURL = `https://backendnodejscs1.herokuapp.com/vote/${poll._id}`; //Our previously set up route in the backend
+    
     fetch(postURL, {
       method: "POST",
       headers: {
@@ -82,7 +80,7 @@ const Pollcard = (props) => {
       .then((response) => response.json())
       .then((data) => {
         // setPolls(data);
-        //  console.log(data)
+      
         if (data.isVoted) {
           // alert("already voted")
           setIsVoted(true);

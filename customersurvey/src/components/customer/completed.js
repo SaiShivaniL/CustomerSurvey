@@ -14,7 +14,7 @@ export default class CompletedPage extends React.Component{
     }
     componentDidMount(){
         if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
-        axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
+        axios.get("https://backendapicasestudy.herokuapp.com/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].complete.map((e)=>e===null?false:[e.user,e.title,e.id])
                     this.setState({list:x})})}else{this.props.navigate("/cfront")}
     }
@@ -40,7 +40,7 @@ export default class CompletedPage extends React.Component{
             <CNavigation/>
             <button style={{position:'fixed',right:'2%',top:'3.5rem',fontWeight:'bolder',fontSize:'1.5rem'}} onClick={()=>{
                  if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
-                axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
+                axios.get("https://backendapicasestudy.herokuapp.com/customer/"+localStorage.getItem("cEmail")).then((data)=>{
                     var x=data.data[0].complete.map((e)=>e===null?false:[e.user,e.title,e.id])
                     this.setState({list:x})
                 })}else{this.props.navigate("/cfront")}

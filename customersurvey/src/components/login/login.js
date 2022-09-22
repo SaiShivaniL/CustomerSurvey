@@ -20,7 +20,7 @@ const LoginPage = () => {
             ...user,
             [name]:value
         })
-        //console.log(name,value)
+      
     }
     const regis=()=>{
         navigate("/register")
@@ -28,11 +28,10 @@ const LoginPage = () => {
     const login=()=>{
         const {id,password}=user
         if(id && password){
-        axios.post("http://localhost:5055/login",user)
+        axios.post("https://backendnodejscs1.herokuapp.com/login",user)
         .then(res=>{
             setMessage(res.data.message)
             //navigate("/homepage")
-            console.log(res.data.message)
             if(res.data.message==="Login Successfull")
             {
                 localStorage.setItem("Name",id)
@@ -49,8 +48,6 @@ const LoginPage = () => {
         
         <div className="lpage">
         <div className="lcover">
-            {console.log("User",user)}
-      
             <div className='lbox'>
                 <img src="telstralogo.jpg" alt="logo" height="100px" width="250px"/>
             </div>

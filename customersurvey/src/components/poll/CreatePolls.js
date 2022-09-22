@@ -11,7 +11,7 @@ function CreatePolls() {
   });
 
   const handleSubmit = (e) => {
-    const postURL = "http://localhost:5055/poll";
+    const postURL = "https://backendnodejscs1.herokuapp.com/poll";
     const id = localStorage.getItem("Name");
     fetch(postURL, {
       method: "POST",
@@ -36,7 +36,7 @@ function CreatePolls() {
     const question2 =e.target.value;
     // question2.push("");
     setState({ question:question2, options:state.options });
-    console.log(state)
+    
     // updateOption();
   };
 
@@ -45,7 +45,7 @@ function CreatePolls() {
     const options2 =state.options;
     options2.push("");
     setState({ question:state.question, options:options2 });
-    console.log(state)
+    
     // updateOption();
   };
 
@@ -57,7 +57,7 @@ function CreatePolls() {
     const options2 =state.options;
     options2[index] = e.target.value
     setState({ question:state.question, options:options2 });
-    console.log(state)
+    
     // updateOption();
   };
 
@@ -65,7 +65,7 @@ function CreatePolls() {
     const options2 =state.options;
     options2.splice(index, 1);
     setState({ question:state.question, options:options2 });
-    console.log(state)
+    
     // updateOption();
   };
 

@@ -10,7 +10,7 @@ function AllBar() {
     useEffect(() => {
         async function getdata() {
             var d = await axios.get(
-                "http://localhost:8000/showans/"+localStorage.getItem("GraphId")
+                "https://backendapicasestudy.herokuapp.com/showans/"+localStorage.getItem("GraphId")
             );
             setAns(d.data[0]);
             setQus(d.data[1]);

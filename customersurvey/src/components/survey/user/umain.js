@@ -124,7 +124,6 @@ export default class Umain extends React.Component{
                   var sorted=this.state.final.sort((a,b)=>{
                     return a.qid-b.qid
                   })
-                  console.log({id:this.state.survey["id"],title:this.state.survey["title"],final:sorted})
                 }
               })
             }

@@ -18,27 +18,25 @@ export default class View extends React.Component{
         this.setState({final:[...filt,e]})
     }
     async componentDidMount(){
-        console.log("entered view")
+       
         var {state}=this.props.location
         var {code}=!state?{code:"notsecret"}:state
-        console.log(code,localStorage.getItem("Name"))
         if(code==="notsecret"){
-            console.log("got into")
+            
             this.props.navigate('/login')
         }
         if(!localStorage.getItem("Name")){
-            console.log("got in")
+           
          this.props.navigate("/login")
         }
-        axios.get("http://localhost:8000/users/"+localStorage.getItem("Name")).then((data)=>{
+        axios.get("https://backendapicasestudy.herokuapp.com/users/"+localStorage.getItem("Name")).then((data)=>{
             if(data.data.length===0){
                this.props.navigate("/login")
             }
           })
 
-      console.log("entered axios")
       if(localStorage.getItem("Name")){
-        var d=await axios.get("http://localhost:8000/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("viewId"))
+        var d=await axios.get("https://backendapicasestudy.herokuapp.com/user/"+localStorage.getItem("Name")+"/id/"+localStorage.getItem("viewId"))
             this.setState({survey:d.data},()=>{
             var arry=[]
             var qsn=this.state.survey.question
