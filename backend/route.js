@@ -209,7 +209,8 @@ router.delete('/deltc/eid/:eid',async function(req,res){
     user.map(async (e)=>{
         var utodo = e.todo.filter((t)=>t.id!=req.params.eid)
         //console.log(e.complete)
-        var ucomplete=e.complete.filter((t)=>t.id!=req.params.eid)
+        var ucomplete=e.complete.filter((t)=>t===null?false:t.id!=req.params.eid)
+        ucomplete=ucomplete.filter((t)=>t!=null)
         //console.log(ucomplete)
        await customer.update({email:e.email},{todo:utodo,complete:ucomplete})
     })
@@ -327,9 +328,9 @@ router.post("/newtheory/eid/:eid",async function(req,res){
 
         var utodo = [survey,...utodo]
         //console.log(e.complete)
-        var ucomplete=e.complete.filter((t)=>{t.id!=req.params.eid})
+        var ucomplete=e.complete.filter((t)=>t===null?false:t.id!=req.params.eid)
         //console.log(ucomplete)
-
+        ucomplete=ucomplete.filter((t)=>t!=null)
         
        await customer.update({email:e.email},{todo:utodo,complete:ucomplete})
     })

@@ -15,7 +15,7 @@ export default class CompletedPage extends React.Component{
     componentDidMount(){
         if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
         axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
-                    var x=data.data[0].complete.map((e)=>[e.user,e.title,e.id])
+                    var x=data.data[0].complete.map((e)=>e===null?false:[e.user,e.title,e.id])
                     this.setState({list:x})})}else{this.props.navigate("/cfront")}
     }
     render(){
@@ -41,7 +41,7 @@ export default class CompletedPage extends React.Component{
             <button style={{position:'fixed',right:'2%',top:'3.5rem',fontWeight:'bolder',fontSize:'1.5rem'}} onClick={()=>{
                  if(localStorage.getItem("cName")&&localStorage.getItem("cEmail")){
                 axios.get("http://localhost:8000/customer/"+localStorage.getItem("cEmail")).then((data)=>{
-                    var x=data.data[0].complete.map((e)=>[e.user,e.title,e.id])
+                    var x=data.data[0].complete.map((e)=>e===null?false:[e.user,e.title,e.id])
                     this.setState({list:x})
                 })}else{this.props.navigate("/cfront")}
                 // this.setState({list:[["d","titlt","id1"],["d","titlt","id2"],["d","titlt","id3"]]})
@@ -50,6 +50,7 @@ export default class CompletedPage extends React.Component{
             <center>
             <div >
                 {this.state.list.map((e)=>{
+                    if(e){
                     return <div key={e[2]} style={{margin:"2rem",padding:"1rem",backgroundColor:"rgb(243,243,243)",width:"70%",height:"auto",borderRadius:"8px",cursor:"pointer"}} onClick={()=>{
                         
                     }}>
@@ -57,6 +58,7 @@ export default class CompletedPage extends React.Component{
                         <h1>Title : {e[1]}</h1>
                         {/*<h3>id : {e[2]}</h3>*/}
                     </div>
+                }
                 })}
             </div>
             </center>

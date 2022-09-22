@@ -27,8 +27,8 @@ export default class UOption extends React.Component{
     render(){
     return (
         <div style={{margin:"1%",textAlign:"left",display:"inline"}}>
-            <input id="option" type={this.props.type} value={this.props.value} name={this.props.qid} onClick={(e)=>this.getvalue(e)} style={{accentColor:"blue",height:"18px",width:"18px"}}/>{
-                <label htmlFor='option'  style={{overflowWrap: "break-word"}} >{
+            <input id={this.props.value} type={this.props.type} value={this.props.value} name={this.props.qid} onClick={(e)=>this.getvalue(e)} style={{accentColor:"blue",height:"18px",width:"18px"}}/>{
+                <label htmlFor={this.props.value}  style={{overflowWrap: "break-word"}} >{
                     (this.props.value) } </label> 
             }
             <br/>

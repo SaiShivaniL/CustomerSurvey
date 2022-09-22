@@ -57,13 +57,13 @@ export default class Question extends React.Component{
                 var options=this.props.option.map((e)=>{
                     return {"no":e[0],"value":<Option id={e[0]} getoption={this.getOption} type="radio" name={this.props.qid} value={e[1]}/>}
                 })
-                this.setState({optionarray:this.props.option,option:options})
+                this.setState({optionarray:this.props.option,option:options,choose1:false})
             }
             else if(this.props.type==="checkbox"){
                 var options=this.props.option.map((e)=>{
                     return {"no":e[0],"value":<Option id={e[0]} getoption={this.getOption} type="checkbox" name={this.props.qid} value={e[1]}/>}
                 })
-                this.setState({optionarray:this.props.option,option:options})
+                this.setState({optionarray:this.props.option,option:options,choose2:false})
             }
         })}
     }
