@@ -12,7 +12,7 @@ const app=express()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
-
+let port=process.env.PORT || 5055
 mongoose.connect("mongodb+srv://vamshimanyam:Vams%40123@survey.dbgqyrx.mongodb.net/EmployeeDB",{
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -513,6 +513,6 @@ app.post("/checkotp",async function(req,res){
 })
 
 
-app.listen(5055,()=>{
-    console.log("server Started at port 5055")
+app.listen(port,()=>{
+    console.log("server Started at port ",port)
 })

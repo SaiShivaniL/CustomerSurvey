@@ -17,5 +17,8 @@
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19"
   },
-  "description": ""
+  "description": "",
+  "engines": {
+    "node":"16.17.0"
+  }
 }
